@@ -19,6 +19,7 @@ export interface SprintData {
     healthScore: number;
     sprintName: string;
     daysRemaining: number;
+    endDate: string;
     burnoutRisk: {
         level: 'Low' | 'Medium' | 'High';
         trend: 'up' | 'down' | 'stable';
@@ -34,13 +35,34 @@ export interface SprintData {
     burnoutTrend: { day: string; riskScore: number }[];
     stories: SprintStory[];
     developers: DeveloperWorkload[];
-    aiRecommendations: string[];
+    aiRecommendations: {
+        id: string;
+        title: string;
+        description: string;
+        impact: string;
+        reasoning: string;
+        steps: string[];
+    }[];
 }
+
+// Helper to format dates
+const today = new Date();
+const formatDate = (date: Date) => new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(date);
+const getSprintName = () => {
+    const year = today.getFullYear().toString().slice(-2);
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    return `Sprint ${year}.${month} - Core Features`;
+};
+
+// Calculate dynamic end date (4 days from now)
+const endDate = new Date(today);
+endDate.setDate(today.getDate() + 4);
 
 export const mockSprintData: SprintData = {
     healthScore: 72,
-    sprintName: "Sprint 24.12 - Core Features",
+    sprintName: getSprintName(),
     daysRemaining: 4,
+    endDate: formatDate(endDate),
     burnoutRisk: {
         level: 'Medium',
         trend: 'up',
@@ -54,13 +76,13 @@ export const mockSprintData: SprintData = {
         status: 'Uneven',
     },
     burnoutTrend: [
-        { day: 'Day 1', riskScore: 20 },
-        { day: 'Day 2', riskScore: 25 },
-        { day: 'Day 3', riskScore: 30 },
-        { day: 'Day 4', riskScore: 45 },
-        { day: 'Day 5', riskScore: 55 },
-        { day: 'Day 6', riskScore: 68 },
-        { day: 'Day 7', riskScore: 75 },
+        { day: new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { weekday: 'short' }), riskScore: 20 },
+        { day: new Date(today.getTime() - 5 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { weekday: 'short' }), riskScore: 25 },
+        { day: new Date(today.getTime() - 4 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { weekday: 'short' }), riskScore: 30 },
+        { day: new Date(today.getTime() - 3 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { weekday: 'short' }), riskScore: 45 },
+        { day: new Date(today.getTime() - 2 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { weekday: 'short' }), riskScore: 55 },
+        { day: 'Yesterday', riskScore: 68 },
+        { day: 'Today', riskScore: 75 },
     ],
     stories: [
         {
@@ -111,8 +133,41 @@ export const mockSprintData: SprintData = {
         { name: 'Emily R.', commits: 15, prs: 3, stories: 1, burnoutRisk: 'Low' },
     ],
     aiRecommendations: [
-        "Reassign 'Email Notifications' (ABC-145) from Sarah J. to David L. to balance workload.",
-        "Consider de-scoping 'Payment Gateway' (ABC-129) or swarming to unblock.",
-        "Encourage cooldown time for Sarah J. due to sustained late-night activity.",
+        {
+            id: 'rec-1',
+            title: "Reassign 'Email Notifications'",
+            description: "Reassign 'Email Notifications' (ABC-145) from Sarah J. to David L. to balance workload.",
+            impact: "Reduces Sarah J.'s load by 15% and utilizes David L.'s available capacity.",
+            reasoning: "Sarah J. has 3 active stories and high burnout risk. David L. has completed his sprint goals and has bandwidth.",
+            steps: [
+                "Update assignee field in Jira for ABC-145",
+                "Notify Sarah J. and David L. via Slack",
+                "Schedule brief context transfer meeting"
+            ]
+        },
+        {
+            id: 'rec-2',
+            title: "De-scope 'Payment Gateway'",
+            description: "Consider de-scoping 'Payment Gateway' (ABC-129) or swarming to unblock.",
+            impact: "Increases probability of delivering core sprint goals from 65% to 92%.",
+            reasoning: "External dependency is blocked with no ETA. Continuing to wait puts the entire sprint release at risk.",
+            steps: [
+                "Move ABC-129 to Backlog",
+                "Flag for discussion in next Sprint Planning",
+                "Notify stakeholders of scope change"
+            ]
+        },
+        {
+            id: 'rec-3',
+            title: "Cooldown for Sarah J.",
+            description: "Encourage cooldown time for Sarah J. due to sustained late-night activity.",
+            impact: "Reduces immediate burnout risk and improves long-term retention.",
+            reasoning: "Detected commits between 10 PM and 2 AM for 3 consecutive days.",
+            steps: [
+                "Suggest taking tomorrow morning off",
+                "Review current deadlines to remove immediate pressure",
+                "Check in 1:1 regarding workload sustainability"
+            ]
+        },
     ]
 };

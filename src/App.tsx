@@ -46,7 +46,7 @@ function App() {
           <div>
             <h2 className="text-2xl font-bold text-slate-800">{mockSprintData.sprintName}</h2>
             <p className="text-slate-500 mt-1">
-              <span className="font-medium text-slate-700">{mockSprintData.daysRemaining} days remaining</span> • Ends Dec 24, 2025
+              <span className="font-medium text-slate-700">{mockSprintData.daysRemaining} days remaining</span> • Ends {mockSprintData.endDate}
             </p>
           </div>
           <div className="flex gap-3">
