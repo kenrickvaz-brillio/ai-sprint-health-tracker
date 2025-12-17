@@ -5,6 +5,9 @@ export interface SprintStory {
     riskLevel: 'Low' | 'Medium' | 'High';
     aiReason: string;
     assignee: string;
+    aiAnalysisDetail?: string;
+    impact?: string;
+    suggestedAction?: string;
 }
 
 export interface DeveloperWorkload {
@@ -92,6 +95,9 @@ export const mockSprintData: SprintData = {
             riskLevel: 'High',
             aiReason: 'High churn in commits (12 files changed 5 times)',
             assignee: 'Sarah J.',
+            aiAnalysisDetail: 'The authentication module has seen 12 files changed 5 times in the last 24 hours, indicating potential architectural uncertainty or regression loops. This pattern often precedes integration failures.',
+            impact: 'High risk of breaking login functionality for 100% of users.',
+            suggestedAction: 'Conduct an immediate code review with a senior architect to stabilize the interface.',
         },
         {
             id: 'ABC-129',
@@ -100,6 +106,9 @@ export const mockSprintData: SprintData = {
             riskLevel: 'High',
             aiReason: 'Blocked for 4 days on external dependency',
             assignee: 'Mike T.',
+            aiAnalysisDetail: 'Dependency on the "Stripe API Wrapper" v2.1 has been pending for 4 days. No alternative path has been identified in the code.',
+            impact: 'Delays payment processing feature, a core deliverable for this sprint.',
+            suggestedAction: 'Escalate to the platform team or mock the dependency to proceed with UI development.',
         },
         {
             id: 'ABC-134',
@@ -108,6 +117,9 @@ export const mockSprintData: SprintData = {
             riskLevel: 'Medium',
             aiReason: 'PR open for 48h with no reviews',
             assignee: 'David L.',
+            aiAnalysisDetail: 'Pull Request #402 has been open for 48 hours without any reviewer activity. The code complexity is low, suggesting it might have been overlooked.',
+            impact: 'Minor delay in merging, but could stack up with other pending PRs.',
+            suggestedAction: 'Nudge the team in the daily standup or assign a specific reviewer.',
         },
         {
             id: 'ABC-142',
@@ -116,6 +128,9 @@ export const mockSprintData: SprintData = {
             riskLevel: 'Low',
             aiReason: 'Completed ahead of schedule',
             assignee: 'Emily R.',
+            aiAnalysisDetail: 'Task completed 2 days ahead of the estimated timeline with 100% test coverage.',
+            impact: 'Positive impact on sprint velocity.',
+            suggestedAction: 'No action needed. Consider assigning a stretch goal.',
         },
         {
             id: 'ABC-145',
@@ -124,6 +139,9 @@ export const mockSprintData: SprintData = {
             riskLevel: 'Medium',
             aiReason: 'Last-minute scope increase detected',
             assignee: 'Sarah J.',
+            aiAnalysisDetail: '3 new sub-tasks were added to this story in the last 6 hours, increasing the estimated effort by 40%.',
+            impact: 'Risk of spillover if not re-prioritized.',
+            suggestedAction: 'Review the new requirements with the Product Owner to confirm necessity for this sprint.',
         },
     ],
     developers: [

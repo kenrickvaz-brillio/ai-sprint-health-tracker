@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Lightbulb, ArrowRight, X, Check, Loader2, Target, TrendingUp, ListChecks } from 'lucide-react';
 import type { SprintData } from '../data/mockData';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,6 +11,22 @@ export const AIRecommendations: React.FC<AIRecommendationsProps> = ({ data }) =>
     const [selectedRec, setSelectedRec] = useState<typeof data.aiRecommendations[0] | null>(null);
     const [isApplying, setIsApplying] = useState(false);
     const [appliedRecs, setAppliedRecs] = useState<string[]>([]);
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && !isApplying) {
+                setSelectedRec(null);
+            }
+        };
+
+        if (selectedRec) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [selectedRec, isApplying]);
 
     const handleApply = () => {
         setIsApplying(true);
