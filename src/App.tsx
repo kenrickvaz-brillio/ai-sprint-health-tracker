@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { SprintHealthHero } from './components/SprintHealthHero';
 import { BurnoutChart } from './components/BurnoutChart';
 import { StoryRiskTable } from './components/StoryRiskTable';
 import { WorkloadChart } from './components/WorkloadChart';
 import { AIRecommendations } from './components/AIRecommendations';
+import { ExportModal } from './components/ExportModal';
 import { mockSprintData } from './data/mockData';
 import { motion } from 'framer-motion';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
   useEffect(() => {
     // Simulate initial data fetching
@@ -50,10 +52,13 @@ function App() {
             </p>
           </div>
           <div className="flex gap-3">
-            <button className="px-4 py-2 bg-white border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors">
+            <button
+              onClick={() => setIsExportModalOpen(true)}
+              className="px-4 py-2 bg-white border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
+            >
               Export Report
             </button>
-            <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm">
+            <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm cursor-pointer">
               View Board
             </button>
           </div>
@@ -101,6 +106,12 @@ function App() {
           </motion.div>
         </div>
       </main>
+
+      <ExportModal
+        isOpen={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+        data={mockSprintData}
+      />
     </div>
   );
 }
