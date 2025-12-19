@@ -1,22 +1,47 @@
 import React from 'react';
 import { Activity, GitBranch, Layout } from 'lucide-react';
+import { ProjectSwitcher } from './ProjectSwitcher';
+import type { Project } from './ProjectSwitcher';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+    projects: Project[];
+    currentProject: Project;
+    onProjectChange: (project: Project) => void;
+    onConnectNew: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({
+    projects,
+    currentProject,
+    onProjectChange,
+    onConnectNew,
+}) => {
     return (
         <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
             <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-2 rounded-lg shadow-md">
-                        <Activity className="text-white" size={24} />
+                <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
+                        <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-2 rounded-lg shadow-md">
+                            <Activity className="text-white" size={24} />
+                        </div>
+                        <div>
+                            <h1 className="text-xl font-bold text-slate-900 leading-tight">
+                                AI Sprint Health Tracker
+                            </h1>
+                            <p className="text-xs text-slate-500 font-medium">
+                                Real-time insights & delivery risk analysis
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <h1 className="text-xl font-bold text-slate-900 leading-tight">
-                            AI Sprint Health Tracker
-                        </h1>
-                        <p className="text-xs text-slate-500 font-medium">
-                            Real-time insights & delivery risk analysis
-                        </p>
-                    </div>
+
+                    <div className="h-8 w-px bg-slate-200 mx-2" />
+
+                    <ProjectSwitcher
+                        projects={projects}
+                        currentProject={currentProject}
+                        onProjectChange={onProjectChange}
+                        onConnectNew={onConnectNew}
+                    />
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -47,3 +72,4 @@ export const Header: React.FC = () => {
         </header>
     );
 };
+
