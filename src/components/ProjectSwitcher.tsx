@@ -28,7 +28,7 @@ export const ProjectSwitcher: React.FC<ProjectSwitcherProps> = ({
         <div className="relative">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-2 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors group"
+                className="flex items-center gap-2 px-3 py-2 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors group cursor-pointer"
             >
                 <div
                     className="w-2 h-2 rounded-full"
