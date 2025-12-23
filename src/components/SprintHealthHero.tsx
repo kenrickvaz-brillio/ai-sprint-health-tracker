@@ -22,48 +22,48 @@ export const SprintHealthHero: React.FC<SprintHealthHeroProps> = ({ data }) => {
     };
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
             {/* Main Health Score Card */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="card p-6 flex flex-col items-center justify-center lg:col-span-1 bg-white relative overflow-hidden"
+                className="card p-4 sm:p-6 flex flex-col items-center justify-center lg:col-span-1 bg-white relative overflow-hidden"
             >
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-500"></div>
-                <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Sprint Health Score</h3>
-                <div className="relative flex items-center justify-center">
-                    <svg className="w-32 h-32 transform -rotate-90">
+                <h3 className="text-xs sm:text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Sprint Health Score</h3>
+                <div className="relative flex items-center justify-center scale-90 sm:scale-100">
+                    <svg className="w-28 h-28 sm:w-32 sm:h-32 transform -rotate-90">
                         <circle
                             className="text-slate-100"
                             strokeWidth="8"
                             stroke="currentColor"
                             fill="transparent"
-                            r="58"
-                            cx="64"
-                            cy="64"
+                            r="52"
+                            cx="56"
+                            cy="56"
                         />
                         <circle
                             className={getHealthColor(data.healthScore)}
                             strokeWidth="8"
-                            strokeDasharray={365}
-                            strokeDashoffset={365 - (365 * data.healthScore) / 100}
+                            strokeDasharray={326}
+                            strokeDashoffset={326 - (326 * data.healthScore) / 100}
                             strokeLinecap="round"
                             stroke="currentColor"
                             fill="transparent"
-                            r="58"
-                            cx="64"
-                            cy="64"
+                            r="52"
+                            cx="56"
+                            cy="56"
                         />
                     </svg>
                     <div className="absolute flex flex-col items-center">
-                        <span className={cn("text-4xl font-bold", getHealthColor(data.healthScore))}>
+                        <span className={cn("text-3xl sm:text-4xl font-bold", getHealthColor(data.healthScore))}>
                             {data.healthScore}
                         </span>
-                        <span className="text-xs text-slate-400 font-medium">/100</span>
+                        <span className="text-[10px] sm:text-xs text-slate-400 font-medium">/100</span>
                     </div>
                 </div>
-                <div className={cn("mt-4 px-3 py-1 rounded-full text-sm font-bold bg-opacity-10",
+                <div className={cn("mt-4 px-3 py-1 rounded-full text-xs sm:text-sm font-bold bg-opacity-10",
                     data.healthScore >= 80 ? "bg-green-100 text-green-700" :
                         data.healthScore >= 60 ? "bg-yellow-100 text-yellow-700" : "bg-red-100 text-red-700"
                 )}>
@@ -72,31 +72,31 @@ export const SprintHealthHero: React.FC<SprintHealthHeroProps> = ({ data }) => {
             </motion.div>
 
             {/* Summary Metrics */}
-            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                 {/* Burnout Risk */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    className="card p-5 border-l-4 border-l-orange-500"
+                    className="card p-4 sm:p-5 border-l-4 border-l-orange-500"
                 >
                     <div className="flex justify-between items-start mb-2">
                         <div className="flex items-center gap-2">
-                            <div className="p-2 bg-orange-50 rounded-lg">
-                                <Users size={18} className="text-orange-600" />
+                            <div className="p-1.5 sm:p-2 bg-orange-50 rounded-lg">
+                                <Users className="text-orange-600 w-4 h-4 sm:w-[18px] sm:h-[18px]" />
                             </div>
-                            <h4 className="font-semibold text-slate-700">Burnout Risk</h4>
+                            <h4 className="text-sm sm:text-base font-semibold text-slate-700">Burnout Risk</h4>
                         </div>
-                        <span className="badge badge-warning">Medium</span>
+                        <span className="badge badge-warning text-[10px] sm:text-xs">Medium</span>
                     </div>
-                    <div className="mt-3">
+                    <div className="mt-2 sm:mt-3">
                         <div className="flex items-baseline gap-2">
-                            <span className="text-2xl font-bold text-slate-800">Medium</span>
-                            <span className="text-xs font-medium text-red-500 flex items-center">
-                                <TrendingUp size={12} className="mr-0.5" /> {data.burnoutRisk.value}
+                            <span className="text-xl sm:text-2xl font-bold text-slate-800">Medium</span>
+                            <span className="text-[10px] sm:text-xs font-medium text-red-500 flex items-center">
+                                <TrendingUp className="mr-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3" /> {data.burnoutRisk.value}
                             </span>
                         </div>
-                        <p className="text-xs text-slate-500 mt-1">Increase in late-night commits</p>
+                        <p className="text-[10px] sm:text-xs text-slate-500 mt-1">Increase in late-night commits</p>
                     </div>
                 </motion.div>
 
@@ -105,25 +105,25 @@ export const SprintHealthHero: React.FC<SprintHealthHeroProps> = ({ data }) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="card p-5 border-l-4 border-l-red-500"
+                    className="card p-4 sm:p-5 border-l-4 border-l-red-500"
                 >
                     <div className="flex justify-between items-start mb-2">
                         <div className="flex items-center gap-2">
-                            <div className="p-2 bg-red-50 rounded-lg">
-                                <AlertTriangle size={18} className="text-red-600" />
+                            <div className="p-1.5 sm:p-2 bg-red-50 rounded-lg">
+                                <AlertTriangle className="text-red-600 w-4 h-4 sm:w-[18px] sm:h-[18px]" />
                             </div>
-                            <h4 className="font-semibold text-slate-700">Delivery Risk</h4>
+                            <h4 className="text-sm sm:text-base font-semibold text-slate-700">Delivery Risk</h4>
                         </div>
-                        <span className="badge badge-danger">High</span>
+                        <span className="badge badge-danger text-[10px] sm:text-xs">High</span>
                     </div>
-                    <div className="mt-3">
+                    <div className="mt-2 sm:mt-3">
                         <div className="flex items-baseline gap-2">
-                            <span className="text-2xl font-bold text-slate-800">High</span>
-                            <span className="text-xs font-medium text-slate-500">
+                            <span className="text-xl sm:text-2xl font-bold text-slate-800">High</span>
+                            <span className="text-[10px] sm:text-xs font-medium text-slate-500">
                                 {data.deliveryRisk.atRiskStories} stories at risk
                             </span>
                         </div>
-                        <p className="text-xs text-slate-500 mt-1">Blocked items & scope creep</p>
+                        <p className="text-[10px] sm:text-xs text-slate-500 mt-1">Blocked items & scope creep</p>
                     </div>
                 </motion.div>
 
@@ -132,22 +132,22 @@ export const SprintHealthHero: React.FC<SprintHealthHeroProps> = ({ data }) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="card p-5 border-l-4 border-l-yellow-500"
+                    className="card p-4 sm:p-5 border-l-4 border-l-yellow-500 sm:col-span-2 md:col-span-1"
                 >
                     <div className="flex justify-between items-start mb-2">
                         <div className="flex items-center gap-2">
-                            <div className="p-2 bg-yellow-50 rounded-lg">
-                                <Zap size={18} className="text-yellow-600" />
+                            <div className="p-1.5 sm:p-2 bg-yellow-50 rounded-lg">
+                                <Zap className="text-yellow-600 w-4 h-4 sm:w-[18px] sm:h-[18px]" />
                             </div>
-                            <h4 className="font-semibold text-slate-700">Workload</h4>
+                            <h4 className="text-sm sm:text-base font-semibold text-slate-700">Workload</h4>
                         </div>
-                        <span className="badge badge-warning">Uneven</span>
+                        <span className="badge badge-warning text-[10px] sm:text-xs">Uneven</span>
                     </div>
-                    <div className="mt-3">
+                    <div className="mt-2 sm:mt-3">
                         <div className="flex items-baseline gap-2">
-                            <span className="text-2xl font-bold text-slate-800">Uneven</span>
+                            <span className="text-xl sm:text-2xl font-bold text-slate-800">Uneven</span>
                         </div>
-                        <p className="text-xs text-slate-500 mt-1">2 devs over-capacity</p>
+                        <p className="text-[10px] sm:text-xs text-slate-500 mt-1">2 devs over-capacity</p>
                     </div>
                 </motion.div>
 
@@ -156,10 +156,10 @@ export const SprintHealthHero: React.FC<SprintHealthHeroProps> = ({ data }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
-                    className="col-span-1 md:col-span-3 bg-indigo-50 border border-indigo-100 rounded-lg p-3 flex items-start gap-3"
+                    className="col-span-1 sm:col-span-2 md:col-span-3 bg-indigo-50 border border-indigo-100 rounded-lg p-3 flex items-start gap-3"
                 >
                     <SparklesIcon className="text-indigo-600 mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-indigo-800">
+                    <p className="text-xs sm:text-sm text-indigo-800">
                         <span className="font-semibold">AI Insight:</span> Based on recent commit patterns, story movement, and sprint velocity,
                         delivery risk is trending upward due to blocked dependencies.
                     </p>

@@ -20,6 +20,10 @@ function App() {
   const currentSprintData = currentProject.id === 'proj-1' ? mockSprintData : mockSprintData2;
 
   useEffect(() => {
+    document.title = `${currentProject.name} | AI Sprint Health Tracker`;
+  }, [currentProject]);
+
+  useEffect(() => {
     // Simulate initial data fetching
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -67,22 +71,22 @@ function App() {
         onConnectNew={handleConnectNew}
       />
 
-      <main className="max-w-7xl mx-auto px-6 py-8">
-        <div className="mb-8 flex items-center justify-between">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-slate-800">{currentSprintData.sprintName}</h2>
-            <p className="text-slate-500 mt-1">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-800">{currentSprintData.sprintName}</h2>
+            <p className="text-sm text-slate-500 mt-1">
               <span className="font-medium text-slate-700">{currentSprintData.daysRemaining} days remaining</span> • Ends {currentSprintData.endDate}
             </p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             <button
               onClick={() => setIsExportModalOpen(true)}
-              className="px-4 py-2 bg-white border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
+              className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-white border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
             >
               Export Report
             </button>
-            <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm cursor-pointer">
+            <button className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm cursor-pointer">
               View Board
             </button>
           </div>

@@ -41,42 +41,42 @@ export const AIRecommendations: React.FC<AIRecommendationsProps> = ({ data }) =>
 
     return (
         <>
-            <div className="card p-6 bg-gradient-to-br from-indigo-600 to-purple-700 text-white border-none shadow-lg h-full">
+            <div className="card p-4 sm:p-6 bg-gradient-to-br from-indigo-600 to-purple-700 text-white border-none shadow-lg h-full">
                 <div className="flex items-center gap-3 mb-6">
                     <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
-                        <Lightbulb size={24} className="text-yellow-300" />
+                        <Lightbulb className="text-yellow-300 w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                    <h3 className="text-xl font-bold">AI Recommendations</h3>
+                    <h3 className="text-lg sm:text-xl font-bold">AI Recommendations</h3>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                     {data.aiRecommendations.map((rec, index) => {
                         const isApplied = appliedRecs.includes(rec.id);
                         return (
                             <div
                                 key={rec.id}
                                 onClick={() => !isApplied && setSelectedRec(rec)}
-                                className={`bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/10 transition-all cursor-pointer group relative overflow-hidden ${isApplied ? 'opacity-75 cursor-default' : 'hover:bg-white/20'
+                                className={`bg-white/10 backdrop-blur-md rounded-lg p-3 sm:p-4 border border-white/10 transition-all cursor-pointer group relative overflow-hidden ${isApplied ? 'opacity-75 cursor-default' : 'hover:bg-white/20'
                                     }`}
                             >
                                 {isApplied && (
                                     <div className="absolute top-2 right-2 bg-green-500/20 p-1 rounded-full">
-                                        <Check size={14} className="text-green-300" />
+                                        <Check className="text-green-300 w-3 h-3 sm:w-3.5 sm:h-3.5" />
                                     </div>
                                 )}
                                 <div className="flex items-start gap-3">
-                                    <div className={`mt-1 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${isApplied ? 'bg-green-500/20 text-green-300' : 'bg-white/20'
+                                    <div className={`mt-1 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 ${isApplied ? 'bg-green-500/20 text-green-300' : 'bg-white/20'
                                         }`}>
                                         {isApplied ? <Check size={10} /> : index + 1}
                                     </div>
-                                    <div className="flex-1">
-                                        <p className={`text-sm font-medium leading-relaxed ${isApplied ? 'line-through text-white/50' : ''}`}>
+                                    <div className="flex-1 min-w-0">
+                                        <p className={`text-xs sm:text-sm font-medium leading-relaxed truncate ${isApplied ? 'line-through text-white/50' : ''}`}>
                                             {rec.title}
                                         </p>
-                                        <p className="text-xs text-white/70 mt-1 line-clamp-1">{rec.description}</p>
+                                        <p className="text-[10px] sm:text-xs text-white/70 mt-0.5 sm:mt-1 line-clamp-1">{rec.description}</p>
                                     </div>
                                     {!isApplied && (
-                                        <ArrowRight size={16} className="mt-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        <ArrowRight className="mt-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                     )}
                                 </div>
                             </div>
@@ -84,7 +84,7 @@ export const AIRecommendations: React.FC<AIRecommendationsProps> = ({ data }) =>
                     })}
                 </div>
 
-                <button className="w-full mt-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                <button className="w-full mt-6 py-2.5 sm:py-3 bg-white text-indigo-600 text-sm sm:text-base font-semibold rounded-lg hover:bg-indigo-50 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
                     View All Suggestions
                 </button>
             </div>

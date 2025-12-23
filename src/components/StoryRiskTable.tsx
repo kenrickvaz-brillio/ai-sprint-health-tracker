@@ -56,11 +56,11 @@ export const StoryRiskTable: React.FC<StoryRiskTableProps> = ({ data }) => {
                     <table className="w-full text-left text-sm">
                         <thead className="bg-slate-50 text-slate-500 font-medium">
                             <tr>
-                                <th className="px-6 py-3">Story ID</th>
-                                <th className="px-6 py-3">Status</th>
-                                <th className="px-6 py-3">Risk Level</th>
-                                <th className="px-6 py-3">AI Analysis</th>
-                                <th className="px-6 py-3">Assignee</th>
+                                <th className="px-4 sm:px-6 py-3">Story ID</th>
+                                <th className="px-4 sm:px-6 py-3 hidden sm:table-cell">Status</th>
+                                <th className="px-4 sm:px-6 py-3">Risk Level</th>
+                                <th className="px-4 sm:px-6 py-3">AI Analysis</th>
+                                <th className="px-4 sm:px-6 py-3 hidden md:table-cell">Assignee</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
@@ -73,21 +73,21 @@ export const StoryRiskTable: React.FC<StoryRiskTableProps> = ({ data }) => {
                                         story.riskLevel === 'High' ? "bg-red-50/30" : ""
                                     )}
                                 >
-                                    <td className="px-6 py-4 font-medium text-slate-700 group-hover:text-indigo-600 transition-colors">{story.id}</td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 sm:px-6 py-4 font-medium text-slate-700 group-hover:text-indigo-600 transition-colors">{story.id}</td>
+                                    <td className="px-4 sm:px-6 py-4 hidden sm:table-cell">
                                         <div className="flex items-center gap-2 text-slate-600">
                                             {getStatusIcon(story.status)}
                                             {story.status}
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4">{getRiskBadge(story.riskLevel)}</td>
-                                    <td className="px-6 py-4 text-slate-600">
+                                    <td className="px-4 sm:px-6 py-4">{getRiskBadge(story.riskLevel)}</td>
+                                    <td className="px-4 sm:px-6 py-4 text-slate-600">
                                         <div className="flex items-start gap-2">
                                             {story.riskLevel === 'High' && <AlertCircle size={14} className="text-red-500 mt-0.5 flex-shrink-0" />}
-                                            <span className="line-clamp-1">{story.aiReason}</span>
+                                            <span className="line-clamp-1 text-xs sm:text-sm">{story.aiReason}</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 sm:px-6 py-4 hidden md:table-cell">
                                         <div className="flex items-center gap-2">
                                             <div className="w-6 h-6 rounded-full bg-slate-200 text-xs flex items-center justify-center text-slate-600 font-medium">
                                                 {story.assignee.charAt(0)}
