@@ -2,6 +2,8 @@
 
 A polished, frontend-only web demo designed to look like an intelligent engineering leadership dashboard. The app simulates pulling data from Jira and Git to present AI-generated insights for a single sprint.
 
+**[Live Demo](https://thankful-meadow-05b67e21e.4.azurestaticapps.net)**
+
 ![React](https://img.shields.io/badge/React-18-blue)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8)
 ![Recharts](https://img.shields.io/badge/Recharts-2.12-orange)
